@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"strconv"
+	"fmt"
 )
 
 const (
@@ -37,6 +38,8 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 // send raw transaction,
 // broadcasts taw transaction to network
 func (b *Bitcoind) SendRawTransaction(rawTx string) (txid string, err error) {
+	fmt.Println("send raw transaction")
+	fmt.Println(rawTx)
 	r, err := b.client.call("sendrawtransaction", []string{rawTx})
 	if err = handleError(err, &r); err != nil {
 		return
