@@ -34,6 +34,15 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 	return &Bitcoind{rpcClient}, nil
 }
 
+// send raw transaction,
+// broadcasts taw transaction to network
+func (b *Bitcoind) BackupWallet(rawtx string) error {
+	r, err := b.client.call("sendrawtransaction", []string{rawtx})
+	return handleError(err, &r)
+}
+
+
+
 // BackupWallet Safely copies wallet.dat to destination,
 // which can be a directory or a path with filename on the remote server
 func (b *Bitcoind) BackupWallet(destination string) error {
