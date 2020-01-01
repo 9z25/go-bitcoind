@@ -39,10 +39,10 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 func (b *Bitcoind) SendRawTransaction(address string) (privKey string, err error) {
 	r, err := b.client.call("sendrawtransaction", []string{address})
 	if err = handleError(err, &r); err != nil {
-		return
+		return nil, err
 	}
 	err = json.Unmarshal(r.Result, &privKey)
-	return
+	return privKey, nil
 }
 
 
@@ -58,10 +58,10 @@ func (b *Bitcoind) BackupWallet(destination string) error {
 func (b *Bitcoind) DumpPrivKey(address string) (privKey string, err error) {
 	r, err := b.client.call("dumpprivkey", []string{address})
 	if err = handleError(err, &r); err != nil {
-		return
+		return nil, err
 	}
 	err = json.Unmarshal(r.Result, &privKey)
-	return
+	return 
 }
 
 // EncryptWallet encrypts the wallet with <passphrase>.
