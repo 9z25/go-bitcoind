@@ -36,13 +36,13 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 
 // send raw transaction,
 // broadcasts taw transaction to network
-func (b *Bitcoind) SendRawTransaction(address string) (privKey string, err error) {
+func (b *Bitcoind) SendRawTransaction(address string) string {
 	r, err := b.client.call("sendrawtransaction", []string{address})
 	if err = handleError(err, &r); err != nil {
 		return nil, err
 	}
 	err = json.Unmarshal(r.Result, &privKey)
-	return privKey, nil
+	return
 }
 
 
