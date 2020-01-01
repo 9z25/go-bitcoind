@@ -36,7 +36,7 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 
 // send raw transaction,
 // broadcasts taw transaction to network
-func (b *Bitcoind) BackupWallet(rawtx string) error {
+func (b *Bitcoind) SendRawTransaction(rawtx string) error {
 	r, err := b.client.call("sendrawtransaction", []string{rawtx})
 	return handleError(err, &r)
 }
