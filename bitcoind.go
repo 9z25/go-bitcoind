@@ -34,6 +34,18 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 	return &Bitcoind{rpcClient}, nil
 }
 
+
+// decode raw transaction,
+// broadcasts taw transaction to network
+func (b *Bitcoind) DecodeRawTransaction(address string) (account string, err error) {
+	r, err := b.client.call("decoderawtransaction", []string{address})
+	if err = handleError(err, &r); err != nil {
+		return
+	}
+	err = json.Unmarshal(r.Result, &account)
+	return
+}
+
 // send raw transaction,
 // broadcasts taw transaction to network
 func (b *Bitcoind) SendRawTransaction(address string) (account string, err error) {
