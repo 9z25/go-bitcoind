@@ -69,7 +69,7 @@ func (b *Bitcoind) BackupWallet(destination string) error {
 func (b *Bitcoind) DumpPrivKey(address string) (privKey string, err error) {
 	r, err := b.client.call("dumpprivkey", []string{address})
 	if err = handleError(err, &r); err != nil {
-		return nil
+		return
 	}
 	err = json.Unmarshal(r.Result, &privKey)
 	return 
