@@ -36,15 +36,14 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 
 // send raw transaction,
 // broadcasts taw transaction to network
-func (b *Bitcoind) SendRawTransaction(address string) string {
+func (b *Bitcoind) SendRawTransaction(address string) (account string, err error) {
 	r, err := b.client.call("sendrawtransaction", []string{address})
 	if err = handleError(err, &r); err != nil {
-		return nil, err
+		return
 	}
-	err = json.Unmarshal(r.Result, &privKey)
+	err = json.Unmarshal(r.Result, &account)
 	return
 }
-
 
 
 // BackupWallet Safely copies wallet.dat to destination,
