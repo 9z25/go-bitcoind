@@ -47,6 +47,9 @@ func (b *Bitcoind) DecodeRawTransaction(address string) (account string, err err
 	if err = handleError(err, &r); err != nil {
 		return
 	}
+	fmt.Println("r")
+	fmt.Println(r)
+	fmt.Println("r")
 	err = json.Unmarshal(r.Result, &account)
 	return
 }
