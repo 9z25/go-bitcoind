@@ -40,16 +40,11 @@ func New(host string, port int, user, passwd string, useSSL bool, timeoutParam .
 // broadcasts taw transaction to network
 func (b *Bitcoind) DecodeRawTransaction(address string) (tx RawTransaction, err error) {
 	
-	fmt.Println("address")
-	fmt.Println(address)
-	fmt.Println("address")
 	r, err := b.client.call("decoderawtransaction", []string{address})
 	if err = handleError(err, &r); err != nil {
 		return
 	}
-	fmt.Println("r")
-	fmt.Println(r)
-	fmt.Println("r")
+	
 	err = json.Unmarshal(r.Result, &tx)
 	return
 }
