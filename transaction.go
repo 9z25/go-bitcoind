@@ -64,6 +64,8 @@ type Transaction struct {
 	BlockHash       string               `json:"blockhash"`
 	BlockIndex      int64                `json:"blockindex"`
 	BlockTime       int64                `json:"blocktime"`
+	Vin           []Vin  `json:"vin"`
+	Vout          []Vout `json:"vout"`
 	TxID            string               `json:"txid"`
 	WalletConflicts []string             `json:"walletconflicts"`
 	Time            int64                `json:"time"`
